@@ -29,7 +29,8 @@ namespace Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions
         /// <returns>List of <see cref="MethodInfo"/> instances representing HTTP triggers.</returns>
         public static List<MethodInfo> GetHttpTriggerMethods(this IDocumentHelper helper, Assembly assembly)
         {
-            var methods = assembly.GetLoadableTypes()
+            var assemblies = assembly.GetReferencedAssemblies().Select(Assembly.Load).ToList();
+            var methods = assemblies.SelectMany(x => x.GetLoadableTypes())
                                   .SelectMany(p => p.GetMethods())
                                   .Where(p => p.ExistsCustomAttribute<FunctionAttribute>())
                                   .Where(p => p.ExistsCustomAttribute<OpenApiOperationAttribute>())
