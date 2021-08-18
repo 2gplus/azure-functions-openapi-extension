@@ -8,7 +8,6 @@ trigger:
 pr: none
 
 variables:
-#- group: open-api-extension-variable-group
 - name: TestRunStatus
   value: ''
 - name: Version
