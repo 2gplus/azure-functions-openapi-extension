@@ -36,7 +36,7 @@ stages:
     - template: 'template-steps-publish.yaml'
       parameters:
         configuration: 'Release'
-        version: '$(Version)'
+        version: '${{ parameters.Version }}'
 
 # - stage: Release
 #   displayName: 'Release: To NuGet'
